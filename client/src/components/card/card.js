@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Card, Button } from "react-bootstrap";
 
-const card = () => {
+const card = props => {
   return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
+    <Card
+      style={{
+        "max-width": "256px",
+        "text-align": "center"
+      }}
+      bg="light"
+    >
+      {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
+        <Card.Title>{props.category}</Card.Title>
+        <Card.Text>No. of Vacancies : {props.numVacancy}</Card.Text>
         <Button variant="primary">Go somewhere</Button>
       </Card.Body>
     </Card>

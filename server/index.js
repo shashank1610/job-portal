@@ -2,16 +2,20 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const config = require("./config");
 const puppeteer = require("puppeteer");
+const cors = require("cors");
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
 
 app.get("/test", (req, res) => {
   (async () => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto("https://razorpay.com/jobs/");
+
+    await page.goto("https://razorpay.com/jobs/", { timeout: 0, waitUntil: "networkidle0" });
+
     const text = await page.evaluate(() =>
       Array.from(document.querySelectorAll("div.rbox-jobs-group")).map(el => {
         let arr = [];
