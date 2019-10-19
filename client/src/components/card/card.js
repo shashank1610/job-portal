@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const card = props => {
   return (
@@ -14,14 +15,16 @@ const card = props => {
       <Card.Body>
         <Card.Title>{props.category}</Card.Title>
         <Card.Text>{props.numVacancy} Vacancies</Card.Text>
-        <Button
-          variant="primary"
-          onClick={() => {
-            props.onClickCategory(props.category);
-          }}
-        >
-          Go somewhere
-        </Button>
+        <Link to ={props.category}>
+          <Button
+            variant="primary"
+            onClick={() => {
+              props.onClickCategory(props.category);
+            }}
+          >
+            Go somewhere
+          </Button>
+        </Link>
       </Card.Body>
     </Card>
   );

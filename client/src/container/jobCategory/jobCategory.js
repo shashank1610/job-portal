@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "../../components/card/card";
 import axios from "axios";
 import Spinner from "../../components/spinner/spinner";
+import {Link} from 'react-router-dom'
 
 const JobCategory = () => {
   const [jobCategories, setJobCategories] = useState([]);

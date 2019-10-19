@@ -8,7 +8,8 @@ import Spinner from "./components/spinner/spinner";
 import { BrowserRouter } from "react-router-dom";
 import JobCategory from "./container/jobCategory/jobCategory";
 import { Route } from "react-router-dom";
-import jobCategory from './container/jobCategory/jobCategory'
+import jobCategory from "./container/jobCategory/jobCategory";
+import jobCategoryDetails from "./container/jobCategoryDetail/jobCategoryDetail";
 
 function App() {
   // let [jobCategories, setJobCategories] = useState([]);
@@ -138,38 +139,39 @@ function App() {
   // console.log(categories);
   // let view = <div className="row mt-5"> {categories}</div>;
   // //   } else {
-      // jobs.map((el, index) => {
-      //   jobsArr.push(
-      //     <TableComponent
-      //       title={el.name}
-      //       location={el.location}
-      //       id={index + 1}
-      //     />
-      //   );
-      // });
-      // view = (
-      //   <div>
-      //     <Table striped bordered hover>
-      //       <thead>
-      //         <tr>
-      //           <th>#</th>
-      //           <th>Job Title</th>
-      //           <th>Job Location</th>
-      //         </tr>
-      //       </thead>
-      //       <tbody>{jobsArr}</tbody>
-      //     </Table>
-      //     <Button variant="primary" onClick={onBackClickHandler}>
-      //       Back
-      //     </Button>
-      //   </div>
-      // );
+  // jobs.map((el, index) => {
+  //   jobsArr.push(
+  //     <TableComponent
+  //       title={el.name}
+  //       location={el.location}
+  //       id={index + 1}
+  //     />
+  //   );
+  // });
+  // view = (
+  //   <div>
+  //     <Table striped bordered hojobCategoryDetailsver>
+  //       <thead>
+  //         <tr>
+  //           <th>#</th>
+  //           <th>Job Title</th>
+  //           <th>Job Location</th>
+  //         </tr>
+  //       </thead>
+  //       <tbody>{jobsArr}</tbody>
+  //     </Table>
+  //     <Button variant="primary" onClick={onBackClickHandler}>
+  //       Back
+  //     </Button>
+  //   </div>
+  // );
   // //   }
   // // }
   // // }
   return (
     <div className="App">
-      <Route path="/" exact component = {jobCategory} />
+      <Route path="/" exact component={jobCategory} />
+      <Route path="/:CategoryId" component={jobCategoryDetails} />
     </div>
   );
 }
