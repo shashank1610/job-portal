@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Card, Button } from "react-bootstrap";
 
 const card = props => {
@@ -13,8 +13,15 @@ const card = props => {
       {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
       <Card.Body>
         <Card.Title>{props.category}</Card.Title>
-        <Card.Text>No. of Vacancies : {props.numVacancy}</Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Card.Text>{props.numVacancy} Vacancies</Card.Text>
+        <Button
+          variant="primary"
+          onClick={() => {
+            props.onClickCategory(props.category);
+          }}
+        >
+          Go somewhere
+        </Button>
       </Card.Body>
     </Card>
   );
