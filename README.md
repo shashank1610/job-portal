@@ -1,10 +1,10 @@
 # job-portal
-job-portal is a web application which crawls through razor pay career website and fetches jobs,their categories and location.
+job-portal is a web application which crawls through razor pay career website and fetches jobs,their categories and location. It utilises google's browser automation library `pupeeteer` to crawl web pages and data.  
 
 ## Directory Structure
 /job-portal
-    - /server -> Node.js server with api's on express to interact with client
-    - /client -> React.js app requesting api's and rendering data
+    - /server -> `Node.js` server with api's on `express.js` to interact with client
+    - /client -> `React.js` app requesting api's and rendering data
    
 ## Prerequisites
 1. node and npm installed 
