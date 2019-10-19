@@ -1,6 +1,6 @@
 import React from "react";
-import { Table } from "react-bootstrap";
-const table = (props) => {
+
+const table = props => {
   return (
     <tr>
       <td>{props.id}</td>

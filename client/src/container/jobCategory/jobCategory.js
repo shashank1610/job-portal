@@ -2,15 +2,27 @@ import React, { useEffect, useState } from "react";
 import Card from "../../components/card/card";
 import axios from "axios";
 import Spinner from "../../components/spinner/spinner";
-import {Link} from 'react-router-dom'
+import config from '../../config'
 
 const JobCategory = () => {
+  /* 
+  to get and set all job categories
+  */
   const [jobCategories, setJobCategories] = useState([]);
+  /* 
+  to get and set jobs loading state of the component
+  */
   const [loading, setLoading] = useState(true);
   const categories = [];
+  /* 
+    react hook to make http request to server
+  */
   useEffect(() => {
+    /* 
+    get all job categories from server
+  */
     axios
-      .get("http://localhost:7000/getJobCategories/")
+      .get(`${config.serverUrl}getJobCategories/`)
       .then(res => {
         setJobCategories(res.data);
         setLoading(false);
@@ -19,7 +31,9 @@ const JobCategory = () => {
         console.log(`ERRROR ${error}`);
       });
   }, []);
-  const onCategoryClickHandler = category => {};
+  /*
+  Load component depending upon loading state 
+  */
   let view = <Spinner />;
   if (!loading) {
     jobCategories.map(el => {
@@ -28,12 +42,11 @@ const JobCategory = () => {
           <Card
             category={el.category}
             numVacancy={el.NumVancanies}
-            onClickCategory={onCategoryClickHandler}
           ></Card>
         </div>
       );
     });
-   view =  <div className="row mt-5"> {categories}</div>
+    view = <div className="row mt-5"> {categories}</div>;
   }
   return view;
 };
