@@ -16,7 +16,7 @@ app.use(
 
 app.get("/getJobCategories", (req, res) => {
   (async () => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({headless : false});
     const page = await browser.newPage();
 
     await page.goto("https://razorpay.com/jobs/", {
@@ -26,14 +26,6 @@ app.get("/getJobCategories", (req, res) => {
 
     const text = await page.evaluate(() =>
       Array.from(document.querySelectorAll("div.rbox-jobs-group")).map(el => {
-        let arr = [];
-        // for (let j = 1; j < el.childNodes.length; j++) {
-        //   arr.push({
-        //     name: el.childNodes[j].querySelector("a").innerText,
-        //     location: el.childNodes[j].querySelector(".rbox-job-shortdesc")
-        //       .innerText
-        //   });
-        // }
         let obj = {
           category: el.childNodes[0].innerText,
           NumVancanies: el.childNodes.length - 1
@@ -49,7 +41,7 @@ app.get("/getJobCategories", (req, res) => {
 app.post("/getJobDetailsByCategory", (req, res) => {
   console.log(req.body);
   (async () => {
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
     await page.goto("https://razorpay.com/jobs/", {
@@ -60,7 +52,7 @@ app.post("/getJobDetailsByCategory", (req, res) => {
     const JobDetail = await page.evaluate(jobCategory => {
       let jobs = [];
       Array.from(document.querySelectorAll("div.rbox-jobs-group"))
-        .filter(element => element.childNodes[0].innerText == "Automation")
+        .filter(element => element.childNodes[0].innerText == jobCategory)
         .map(el => {
           for (let j = 1; j < el.childNodes.length; j++) {
             jobs.push({
