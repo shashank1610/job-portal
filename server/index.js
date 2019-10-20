@@ -21,7 +21,7 @@ app.get("/getJobCategories", (req, res) => {
     /*
      launch instance of chromium via pupeteer and create a page object
     */
-    const browser = await puppeteer.launch({headless : false});
+    const browser = await puppeteer.launch();
     const page = await browser.newPage();
     /*
       use the goto api to navigate to requested url 
