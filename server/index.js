@@ -93,7 +93,8 @@ app.post("/getJobDetailsByCategory", (req, res) => {
               jobs.push({
                 name: el.childNodes[j].querySelector("a").innerText,
                 location: el.childNodes[j].querySelector(".rbox-job-shortdesc")
-                  .innerText
+                  .innerText,
+                link: el.childNodes[j].querySelector("a").href
               });
             }
           });
@@ -107,6 +108,82 @@ app.post("/getJobDetailsByCategory", (req, res) => {
     return requested object to client
     */
       return res.send(JobDetail);
+    }
+    return res.end();
+  })();
+});
+
+/*
+ get Description of a particular job
+ */
+app.get("/getJobDetails", (req, res) => {
+  (async () => {
+    /*
+      get url to which the page has to be redirected to 
+    */
+    const urlLink = decodeURIComponent(req.query.link);
+    // let jobUrl = req.body.jobCategory;
+
+    if (urlLink != null) {
+      const browser = await puppeteer.launch();
+
+      const page = await browser.newPage();
+      /*
+     launch instance of chromium via pupeteer and create a page object
+    */
+      await page.goto(urlLink, {
+        timeout: 0,
+        waitUntil: "networkidle0"
+      });
+
+      /*
+      crawl across the web page
+    */
+      const JobDesc = await page.evaluate(() => {
+        let jobDetail = [];
+        /*
+      get title and location of a particular job category
+    */
+        Array.from(document.querySelectorAll("div.rbox-job-fullpage")).map(
+          el => {
+            jobDetail.push({
+              type: el.childNodes[7].querySelector(
+                ".rbox-opening-position-type"
+              ).innerText
+            });
+
+            Array.from(
+              el.childNodes[9].childNodes[0].querySelectorAll("p")
+            ).map((el1, index) => {
+              jobDetail[0][`Desc${index}`] = el1.innerText;
+            });
+            let text = [];
+            Array.from(
+              el.childNodes[9].childNodes[0].querySelectorAll("h4")
+            ).map((el2, index) => {
+              text.push(el2.innerText);
+              jobDetail[0][el2.innerText] = "";
+            });
+            let i = 0;
+            Array.from(
+              el.childNodes[9].childNodes[0].querySelectorAll("ul")
+            ).map(el3 => {
+              jobDetail[0][text[i]] = el3.innerText;
+              i = i + 1;
+            });
+          }
+        );
+        return jobDetail;
+      });
+      /*
+    close instance of browser
+    */
+      console.log(JobDesc);
+      await browser.close();
+      /*
+    return requested object to client
+    */
+      return res.send(JobDesc);
     }
     return res.end();
   })();

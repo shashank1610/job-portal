@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import config from "../../config";
 const JobCategoryDetail = props => {
+  console.log('in categfory details')
   /* 
   to get and set jobs corresponding to a particular category
   */
@@ -42,7 +43,7 @@ const JobCategoryDetail = props => {
   */
   jobs.map((el, index) => {
     jobsArr.push(
-      <TableComponent title={el.name} location={el.location} id={index + 1} />
+      <TableComponent title={el.name} location={el.location} link = {el.link} id={index + 1} />
     );
   });
   /*
@@ -60,6 +61,7 @@ const JobCategoryDetail = props => {
                   <th>#</th>
                   <th>Job Title</th>
                   <th>Job Location</th>
+                  <th>Details</th>
                 </tr>
               </thead>
               <tbody>{jobsArr}</tbody>

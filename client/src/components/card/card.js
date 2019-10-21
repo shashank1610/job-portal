@@ -15,7 +15,7 @@ const card = props => {
       <Card.Body>
         <Card.Title>{props.category}</Card.Title>
         <Card.Text>{props.numVacancy} Vacancies</Card.Text>
-        <Link to={props.category}>
+        <Link to={`getJobDetailsByCategory/${props.category}`}>
           <Button variant="primary" className="btn-sm">
             Details
           </Button>
