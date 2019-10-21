@@ -51,20 +51,24 @@ const JobCategoryDetail = props => {
   let view = <Spinner />;
   if (!loading) {
     view = (
-      <div>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Job Title</th>
-              <th>Job Location</th>
-            </tr>
-          </thead>
-          <tbody>{jobsArr}</tbody>
-        </Table>
-        <Link to="/">
-          <Button variant="primary">Back</Button>
-        </Link>
+      <div className="container">
+        <div className="row mt-5 mb-5">
+          <div className="col-md-12">
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Job Title</th>
+                  <th>Job Location</th>
+                </tr>
+              </thead>
+              <tbody>{jobsArr}</tbody>
+            </Table>
+            <Link to="/">
+              <Button variant="primary">Back</Button>
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }

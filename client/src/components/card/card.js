@@ -6,7 +6,7 @@ const card = props => {
   return (
     <Card
       style={{
-        "max-width": "256px",
+        // "max-width": "256px",
         "text-align": "center"
       }}
       bg="light"
@@ -16,7 +16,9 @@ const card = props => {
         <Card.Title>{props.category}</Card.Title>
         <Card.Text>{props.numVacancy} Vacancies</Card.Text>
         <Link to={props.category}>
-          <Button variant="primary">Details</Button>
+          <Button variant="primary" className="btn-sm">
+            Details
+          </Button>
         </Link>
       </Card.Body>
     </Card>
