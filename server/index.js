@@ -144,41 +144,18 @@ app.get("/getJobDetails", (req, res) => {
         /*
       get title and location of a particular job category
     */
-        Array.from(document.querySelectorAll("div.rbox-job-fullpage")).map(
-          el => {
-            jobDetail.push({
-              type: el.childNodes[7].querySelector(
-                ".rbox-opening-position-type"
-              ).innerText
-            });
-
-            Array.from(
-              el.childNodes[9].childNodes[0].querySelectorAll("p")
-            ).map((el1, index) => {
-              jobDetail[0][`Desc${index}`] = el1.innerText;
-            });
-            let text = [];
-            Array.from(
-              el.childNodes[9].childNodes[0].querySelectorAll("h4")
-            ).map((el2, index) => {
-              text.push(el2.innerText);
-              jobDetail[0][el2.innerText] = "";
-            });
-            let i = 0;
-            Array.from(
-              el.childNodes[9].childNodes[0].querySelectorAll("ul")
-            ).map(el3 => {
-              jobDetail[0][text[i]] = el3.innerText;
-              i = i + 1;
-            });
-          }
-        );
+        let parentDiv = document.querySelectorAll("div.rbox-job-fullpage")[0]
+          .innerText;
+        jobDetail.push({
+          desc: parentDiv
+        });
         return jobDetail;
       });
+
       /*
     close instance of browser
     */
-      console.log(JobDesc);
+
       await browser.close();
       /*
     return requested object to client

@@ -37,9 +37,11 @@ const JobDetail = props => {
   }, []);
   let view = <Spinner />;
   if (!loading) {
-    view = jobDetail.map((el, index) => {
-      jobDetailArr.push(<div>el</div>);
+    jobDetail.map((el, index) => {
+        console.log(el.desc.trim().split('/n'));
+      jobDetailArr.push(<div>{el.desc}</div>);
     });
+    view = (jobDetailArr)
   }
 
   return view;

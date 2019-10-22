@@ -17,6 +17,10 @@ function App() {
         exact
         component={jobCategoryDetails}
       />
+      <Route
+        path="/getJobDetails/:jobLink"
+        component={jobDetail}
+      />
     </div>
   );
 }
